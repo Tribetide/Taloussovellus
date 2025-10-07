@@ -1,3 +1,4 @@
+/* perusfontti ja riviväli */
 :root {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
@@ -5,36 +6,43 @@
 
 * { box-sizing: border-box; }
 
+/* pääsäiliö keskitettynä, max leveys 920px, reunoilla 16px tyhjää */
 main.container {
   max-width: 920px;
   margin: 0 auto;
   padding: 16px;
 }
 
+/* otsikot */
 h1 { margin: 0 0 12px; }
 
+/* suodatin */
 .filter {
   display: flex;
   gap: 8px;
   margin: 12px 0;
 }
 
+/* suodattimen laput */
 .filter input,
 .filter select {
   padding: 6px 8px;
 }
 
+/* taulukko */
 .table {
   width: 100%;
   border-collapse: collapse;
 }
 
+/* taulukon solut */
 .table th,
 .table td {
   padding: 8px 10px;
   border-bottom: 1px solid #eee;
 }
 
+/* taulukon otsikot ja summat */
 .table th { text-align: left; }
 .table td.summa { text-align: right; }
 

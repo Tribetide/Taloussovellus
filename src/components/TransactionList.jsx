@@ -1,9 +1,10 @@
 
-export default function TransactionList({ items }) {
+export default function TransactionList({ items }) { // items = tapahtumat
   console.log('<TransactionList> render', { itemsCount: items.length });
 
-  if (items.length === 0) return <p>Ei rivejä.</p>;
+  if (items.length === 0) return <p>Ei rivejä.</p>; //jos ei rivejä, näytetään viesti
 
+  // taulukko, jossa rivit kartoitettu items-taulukosta
   return (
     <table className="table">
       <thead>
