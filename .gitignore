@@ -1,0 +1,14 @@
+# Buildit ja välimuistit
+/build/
+/out/
+/dist/
+/cmake-build-*/
+.vs/
+.vscode/*
+!.vscode/settings.json
+*.obj
+*.pdb
+*.exe
+*.ilk
+*.log
+*.cache/
