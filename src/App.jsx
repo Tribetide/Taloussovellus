@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Filter from './components/Filter'
 import TransactionList from './components/TransactionList'
+import TransactionForm from './components/TransactionForm' 
 
 // Alkuarvot
 const initial = [ 
@@ -10,9 +11,16 @@ const initial = [
 
 // Pääkomponentti
 export default function App() {
-  const [transactions] = useState(initial); // tapahtumat
+  const [transactions, setTransactions] = useState(initial); // tapahtumat
   const [filter, setFilter] = useState({ text: "", type: "all"}); // suodatin
 
+  // Lisää tapahtuma
+   const handleAdd = (tx) => {
+    console.log("[App] add", tx);
+    setTransactions(prev => [tx, ...prev]); // uusin ensin
+  };
+
+  // Suodatetaan tapahtumia filterillä
   const q = filter.text.toLowerCase().trim(); // haun termi pienaakkosina
   const visible = transactions.filter(t => { // suodatetaan
     const matchesType = filter.type === "all" || t.tyyppi === filter.type; // all tai tyyppi sopii
@@ -32,6 +40,7 @@ export default function App() {
   return (
     <main className="container">
       <h1>Taloussovellus</h1>
+      <TransactionForm onAdd={handleAdd} /> 
       <Filter value={filter} onChange={setFilter} />
       <TransactionList items={visible} />
     </main>
