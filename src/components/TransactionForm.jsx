@@ -50,31 +50,21 @@ export default function TransactionForm({ onAdd }) { // onAdd = lisäysfunktio
 
   return (
     <form onSubmit={handleSubmit} className='form'>
-      <input type='date' name='paiva' value={form.paiva} onChange={handleChange} 
-      required 
-      />
-      <select name="tyyppi" value={form.tyyppi} onChange={handleChange}>
-        <option value="myynti">Myynti</option>
-        <option value="osto">Osto</option>
-      </select>
-      <input
-        name="selite" placeholder="Selite" value={form.selite} onChange={handleChange}
-        required
-      />
-      <input
-        name="vastapuoli" placeholder="Vastapuoli" value={form.vastapuoli} onChange={handleChange}
-      />
-      <input
-        type="number" step="0.01" name="summa" placeholder="0.00"
-        value={form.summa} onChange={handleChange} required
-      />
-      <label style={{ display:"flex", alignItems:"center", gap:6 }}>
-        <input type="checkbox" name="maksettu" checked={form.maksettu} onChange={handleChange}/>
-        Maksettu
-      </label>
-
-      <button type="submit">Lisää</button>
-    </form>
+  <input  className="col-date"    type="date"  name="paiva"      value={form.paiva}      onChange={handleChange} required />
+  <select className="col-type"    name="tyyppi" value={form.tyyppi} onChange={handleChange}>
+    <option value="myynti">Myynti</option>
+    <option value="osto">Osto</option>
+  </select>
+  <input  className="col-selite"  name="selite"      placeholder="Selite"      value={form.selite}      onChange={handleChange} required />
+  <input  className="col-vastapuoli" name="vastapuoli" placeholder="Vastapuoli"  value={form.vastapuoli} onChange={handleChange} />
+  <input  className="col-summa"   type="number" step="0.01" name="summa" placeholder="0.00"
+          value={form.summa} onChange={handleChange} required />
+  <label  className="col-maksettu checkbox">
+    <input type="checkbox" name="maksettu" checked={form.maksettu} onChange={handleChange}/>
+    Maksettu
+  </label>
+  <button className="col-submit" type="submit">Lisää</button>
+</form>
   );
 }
 
