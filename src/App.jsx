@@ -3,6 +3,7 @@ import Filter from './components/Filter'
 import TransactionList from './components/TransactionList'
 import TransactionForm from './components/TransactionForm'
 import transactionService from './services/transactions';
+import Summary from './components/Summary';
 
 
 // Pääkomponentti
@@ -55,6 +56,9 @@ export default function App() {
     return matchesType && matchesText; // molemmat ehdot toteutuvat
   });
 
+  // Järjestetään tapahtumat päivämäärän mukaan (uusin ensin)
+  const visibleSorted = [...visible].sort((a, b) => b.paiva.localeCompare(a.paiva));
+
   // Debug-tulostukset
   console.log('<App> render',{
     transactionsCount: transactions.length, // kaikki tapahtumat
@@ -79,6 +83,9 @@ export default function App() {
       {error && <p>{error}</p>}
       <TransactionForm onAdd={handleAdd} /> 
       <Filter value={filter} onChange={setFilter} />
+      <h3>Yhteenveto</h3>
+      <Summary items={visible} />
+      <h3>Tapahtumat ({visibleSorted.length})</h3>
       <TransactionList items={visible} onDelete={handleDelete} />
     </main>
   );

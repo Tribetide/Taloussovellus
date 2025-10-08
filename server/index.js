@@ -8,8 +8,10 @@ app.use(express.json());
 
 // Alkuarvo tapahtumat (id, paiva, tyyppi, selite, vastapuoli, summa, maksettu)
 let transactions = [
-  { id: '1', paiva: '2025-10-07', tyyppi: 'myynti', selite: 'Konsultointi', vastapuoli: 'Asiakas Oy', summa: 120, maksettu: true },
-  { id: '2', paiva: '2025-10-06', tyyppi: 'osto',   selite: 'Sovellus',     vastapuoli: 'Kehittäjä Oy',   summa: 50,  maksettu: false }
+  { id: '1', paiva: '2025-10-07', tyyppi: 'myynti', selite: 'Konsultointi', vastapuoli: 'Asiakas1 Oy', summa: 120, maksettu: true },
+  { id: '2', paiva: '2025-10-06', tyyppi: 'osto',   selite: 'Sovellus',     vastapuoli: 'Kehittäjä Oy',   summa: 50,  maksettu: false },
+  { id: '3', paiva: '2025-10-08', tyyppi: 'myynti', selite: 'Konsultointi', vastapuoli: 'Asiakas2 Oy', summa: 136.99, maksettu: true },
+  { id: '4', paiva: '2025-10-05', tyyppi: 'osto',   selite: 'Lounas',     vastapuoli: 'Ravintola Oy',   summa: 22.49,  maksettu: true }
 ];
 
 app.get('/api/transactions', (req, res) => {

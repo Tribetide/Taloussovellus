@@ -64,3 +64,32 @@ h1 { margin: 0 0 12px; }
 .form button {
   padding: 6px 8px;
 }
+/* yhteenveto */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);;
+  gap: 12px;
+  margin: 8px 0 16px;
+}
+.summary > div {
+  padding: 10px 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fafafa;
+}
+.summary span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}
+.summary strong {
+  font-size: 18px;
+}
+
+/* responsiivisuus */
+@media (max-width: 800px) {
+  .summary { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .summary { grid-template-columns: 1fr; }
+}
