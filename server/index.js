@@ -57,12 +57,6 @@ app.put('/api/transactions/:id', (req, res) => {
   res.json(updated);
 });
 
-// Käynnistä palvelin
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`API running at http://localhost:${PORT}`);
-});
-
 // 404: tuntematon reitti
 app.use((req, res) => {
   res.status(404).json({ error: 'unknown endpoint' });
@@ -73,3 +67,10 @@ app.use((err, req, res, next) => {
   console.error(err.message);
   res.status(500).json({ error: 'server error' });
 });
+
+// Käynnistä palvelin
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`API running at http://localhost:${PORT}`);
+});
+

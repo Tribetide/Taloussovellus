@@ -1,3 +1,4 @@
+// Tapahtumien listauskomponentti
 
 export default function TransactionList({ items = [], onDelete, onTogglePaid }) { // items = tapahtumat
   console.log('<TransactionList> render', { count: items.length });

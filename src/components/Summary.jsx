@@ -1,4 +1,6 @@
 // Yhteenveto komponentti, laskee ja näyttää yhteenvedon
+
+// valuuttaformaatti euroille
 const euro = new Intl.NumberFormat('fi-FI', { style: 'currency', currency: 'EUR' });
 
 // props: items = tapahtumat

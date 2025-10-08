@@ -1,3 +1,4 @@
+// Pääkomponentti, sovelluksen juurikomponentti
 import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import TransactionList from './components/TransactionList'
@@ -102,7 +103,7 @@ export default function App() {
       <h3>Yhteenveto</h3>
       <Summary items={visible} />
       <h3>Tapahtumat ({visibleSorted.length})</h3>
-      <TransactionList items={visible} onDelete={handleDelete} onTogglePaid={handleTogglePaid} />
+      <TransactionList items={visibleSorted} onDelete={handleDelete} onTogglePaid={handleTogglePaid} />
     </main>
   );
   
