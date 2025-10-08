@@ -42,6 +42,7 @@ export default function TransactionForm({ onAdd }) { // onAdd = lisäysfunktio
       maksettu: form.maksettu
     };
 
+    // debug-tulostus
     console.log("[submit] add tx", tx);
     onAdd(tx); // kutsu yläkomponentin funktiota
     setForm(empty); // tyhjennä lomake

@@ -9,25 +9,43 @@ import transactionService from './services/transactions';
 export default function App() {
   const [transactions, setTransactions] = useState([]); // tapahtumat
   const [filter, setFilter] = useState({ text: "", type: "all"}); // suodatin
+  const [loading, setLoading] = useState(true); // lataus-tila
+  const [error, setError]   = useState(null); // virheviesti
 
   // Haetaan tapahtumat palvelimelta
-  useEffect(() => {
-  transactionService.getAll().then(setTransactions);
+  useEffect(() => { // komponentti renderöityi, lataa data
+    let ignore = false;  // peruttu
+    setLoading(true); // käynnissä
+    transactionService.getAll() // hae kaikki
+      .then(data => { if (!ignore) setTransactions(data); }) // asetetaan data tilaan
+      .catch(error => { if (!ignore) { console.error(error); setError('Lataus epäonnistui'); }}) // virhe
+      .finally(() => { if (!ignore) setLoading(false); }); // valmis
+    return () => { ignore = true; }; // peruutus
   }, []);
 
   // Lisää tapahtuma
    const handleAdd = async (tx) => {
-    console.log("[App] add", tx);
-    const saved = await transactionService.create(tx); // palvelimelta tallennettu
-      setTransactions(prev => [saved, ...prev]); // lisätään alkuun
+    try {
+      const saved = await transactionService.create(tx);
+      setTransactions(prev => [saved, ...prev]);
+    } catch (error) {
+      console.error(error);
+      alert('Tallennus epäonnistui');
+    }
   };
 
   const handleDelete = async (tx) => {
-    console.log("[App] delete", tx);
-    await transactionService.remove(tx.id); // poistetaan palvelimelta
-    setTransactions(prev => prev.filter(t => t.id !== tx.id)); // suodata pois
-  }
-
+    const prev = transactions;                         // optimistinen päivitys
+    setTransactions(p => p.filter(t => t.id !== tx.id));
+    try {
+      await transactionService.remove(tx.id);
+    } catch (error) {
+      console.error(error);
+      alert('Poisto epäonnistui — peruutetaan');
+      setTransactions(prev);                           // revert
+    }
+  };
+  
   // Suodatetaan tapahtumia filterillä
   const q = filter.text.toLowerCase().trim(); // haun termi pienaakkosina
   const visible = transactions.filter(t => { // suodatetaan
@@ -44,10 +62,21 @@ export default function App() {
     visibleCount: visible.length, // näkyvissä olevat
   });
 
+  // JSX, UI, renderöinti
 
-  return (
+    if (loading) { // lataus
+    return (
+      <main className="container">
+        <h1>Taloussovellus</h1>
+        <p>Ladataan…</p>
+      </main>
+    );
+  }
+  
+  return ( // Valmis UI
     <main className="container">
       <h1>Taloussovellus</h1>
+      {error && <p>{error}</p>}
       <TransactionForm onAdd={handleAdd} /> 
       <Filter value={filter} onChange={setFilter} />
       <TransactionList items={visible} onDelete={handleDelete} />

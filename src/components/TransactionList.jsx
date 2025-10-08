@@ -19,8 +19,8 @@ export default function TransactionList({ items = [], onDelete }) { // items = t
         </tr>
       </thead>
       <tbody>
-        {items.map(t => (
-          <tr key={t.id}>
+        {items.map(t => ( // käydään läpi items-taulukko, joka sisältää tapahtumat
+          <tr key={t.id}>{/* jokaisella rivillä oltava uniikki avain */}
             <td><time dateTime={t.paiva}>{t.paiva}</time></td>
             <td>{t.tyyppi}</td>
             <td>{t.selite}</td>
@@ -28,7 +28,7 @@ export default function TransactionList({ items = [], onDelete }) { // items = t
             <td className="summa">{t.summa.toFixed(2)}</td>
             <td>{t.maksettu ? <span className="badge-paid">✓</span> : "–"}</td>
             <td>
-              <button onClick={() => onDelete?.(t)}>Poista</button>
+              <button onClick={() => onDelete?.(t)}>Poista</button> {/* kutsutaan onDelete-funktiota, jos se on määritelty */}
             </td>
           </tr>
         ))}
