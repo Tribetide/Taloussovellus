@@ -18,12 +18,27 @@ Content-Type: application/json
   "selite": "Testimyynti",
   "vastapuoli": "Testi Oy",
   "summa": 123.45,
-  "maksettu": true
+  "maksettu": false
 }
 
 ### Poista (käyttää edellä luodun vastauksen id:tä)
 @id = {{createTx.response.body.$.id}}
 DELETE {{base}}/api/transactions/{{id}}
+
+
+### Päivitä maksettu (vaihda arvoa true/false)
+PUT {{base}}/api/transactions/{{id}}
+Content-Type: application/json
+
+{
+  "id": "21caa273-4d9b-4c4b-a98a-8664a9f01457",
+  "paiva": "2025-10-08",
+  "tyyppi": "myynti",
+  "selite": "Testimyynti",
+  "vastapuoli": "Testi Oy",
+  "summa": 123.45,
+  "maksettu": false
+}
 
 ### (Valinnainen) virhetesti – 400 Bad Request
 POST {{base}}/api/transactions

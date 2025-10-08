@@ -35,6 +35,7 @@ export default function App() {
     }
   };
 
+  // Poista tapahtuma 
   const handleDelete = async (tx) => {
     const prev = transactions;                  // talleta vanha tila
     setTransactions(p => p.filter(t => t.id !== tx.id)); // poista tilasta
@@ -44,6 +45,21 @@ export default function App() {
       console.error(error);
       alert('Poisto epäonnistui — peruutetaan');
       setTransactions(prev);                           // revert
+    }
+  };
+
+  // Vaihda maksettu-tila 
+  const handleTogglePaid = async (tx) => {
+    const optimistic = { ...tx, maksettu: !tx.maksettu }; // käännä maksettu
+    const prev = transactions; // talleta vanha tila
+    setTransactions(p => p.map(t => (t.id === tx.id ? optimistic : t))); 
+    try {
+      const saved = await transactionService.update(tx.id, optimistic); // päivitä palvelimelle
+      setTransactions(p => p.map(t => (t.id === tx.id ? saved : t))); // korjaa tila palvelimen vastauksella
+    } catch (error) {
+      console.error(error);
+      alert('Päivitys epäonnistui — peruutetaan');
+      setTransactions(prev);
     }
   };
   
@@ -86,10 +102,9 @@ export default function App() {
       <h3>Yhteenveto</h3>
       <Summary items={visible} />
       <h3>Tapahtumat ({visibleSorted.length})</h3>
-      <TransactionList items={visible} onDelete={handleDelete} />
+      <TransactionList items={visible} onDelete={handleDelete} onTogglePaid={handleTogglePaid} />
     </main>
   );
   
 }
-
 

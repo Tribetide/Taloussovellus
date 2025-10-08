@@ -21,4 +21,10 @@ const remove = async (id) => { // poista id:llä
   return res.status === 204;
 };
 
-export default { getAll, create, remove };
+const update = async (id, tx) => { // päivitä id:llä
+  const res = await axios.put(`${baseUrl}/${id}`, tx); // tx = lähetettävä tapahtuma
+  console.log('[PUT]', res.data);
+  return res.data;
+}
+
+export default { getAll, create, remove, update };

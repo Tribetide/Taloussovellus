@@ -41,6 +41,22 @@ app.delete('/api/transactions/:id', (req, res) => {
   res.status(204).end();
 });
 
+// Päivitä tapahtuma id:llä
+app.put('/api/transactions/:id', (req, res) => {
+  const { id } = req.params;
+  const i = transactions.findIndex(t => t.id === id);
+  if (i === -1) return res.status(404).json({ error: 'not found' });
+
+  const { paiva, tyyppi, selite, vastapuoli = '', summa, maksettu = false } = req.body;
+  if (!paiva || !selite || !['myynti','osto'].includes(tyyppi) || typeof summa !== 'number' || !(summa > 0)) {
+    return res.status(400).json({ error: 'invalid transaction' });
+  }
+
+  const updated = { id, paiva, tyyppi, selite, vastapuoli, summa, maksettu: !!maksettu };
+  transactions[i] = updated;
+  res.json(updated);
+});
+
 // Käynnistä palvelin
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
