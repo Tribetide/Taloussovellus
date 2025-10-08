@@ -18,7 +18,7 @@ export default function TransactionForm({ onAdd }) { // onAdd = lisäysfunktio
   // Lomakkeen kenttien muutokset
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
-    setForm(f => ({ ...f, [name]: type === "checkbox" ? checked : value })); // kopioi vanhan, muuta yksi
+    setForm(f => ({ ...f, [name]: type === "checkbox" ? checked : value })); // checkboxin arvo checked, muut value
   };
 
   const handleSubmit = (event) => {

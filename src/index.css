@@ -49,6 +49,7 @@ h1 { margin: 0 0 12px; }
 /* pieni merkintä maksetuille */
 .badge-paid { color: #0a0; font-weight: 600; }
 
+/* lomake */
 .form {
   display: grid;
   grid-template-columns: 140px 120px 1fr 1fr 120px 110px auto;
@@ -56,4 +57,10 @@ h1 { margin: 0 0 12px; }
   align-items: center;
   margin: 12px 0 16px;
 }
-.form input, .form select, .form button { padding: 6px 8px; }
+
+/* lomakkeen laput ja napit */
+.form input,
+.form select,
+.form button {
+  padding: 6px 8px;
+}

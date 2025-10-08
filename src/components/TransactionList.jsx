@@ -1,6 +1,6 @@
 
-export default function TransactionList({ items }) { // items = tapahtumat
-  console.log('<TransactionList> render', { itemsCount: items.length });
+export default function TransactionList({ items = [], onDelete }) { // items = tapahtumat
+  console.log('<TransactionList> render', { count: items.length });
 
   if (items.length === 0) return <p>Ei rivejä.</p>; //jos ei rivejä, näytetään viesti
 
@@ -15,6 +15,7 @@ export default function TransactionList({ items }) { // items = tapahtumat
           <th>Vastapuoli</th>
           <th>Summa</th>
           <th>Maksettu</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,9 @@ export default function TransactionList({ items }) { // items = tapahtumat
             <td>{t.vastapuoli}</td>
             <td className="summa">{t.summa.toFixed(2)}</td>
             <td>{t.maksettu ? <span className="badge-paid">✓</span> : "–"}</td>
+            <td>
+              <button onClick={() => onDelete?.(t)}>Poista</button>
+            </td>
           </tr>
         ))}
       </tbody>

@@ -20,6 +20,11 @@ export default function App() {
     setTransactions(prev => [tx, ...prev]); // uusin ensin
   };
 
+  const handleDelete = (tx) => {
+    console.log("[App] delete", tx);
+    setTransactions(prev => prev.filter(t => t.id !== tx.id)); // suodata pois
+  }
+
   // Suodatetaan tapahtumia filterillä
   const q = filter.text.toLowerCase().trim(); // haun termi pienaakkosina
   const visible = transactions.filter(t => { // suodatetaan
@@ -42,7 +47,7 @@ export default function App() {
       <h1>Taloussovellus</h1>
       <TransactionForm onAdd={handleAdd} /> 
       <Filter value={filter} onChange={setFilter} />
-      <TransactionList items={visible} />
+      <TransactionList items={visible} onDelete={handleDelete} />
     </main>
   );
   
