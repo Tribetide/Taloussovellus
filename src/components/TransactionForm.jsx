@@ -34,7 +34,6 @@ export default function TransactionForm({ onAdd }) { // onAdd = lisäysfunktio
 
     // luo uusi tapahtuma, kutsu yläkomponentin funktiota
     const tx = {
-      id: Date.now().toString(),
       paiva: form.paiva,
       tyyppi: form.tyyppi,
       selite: form.selite.trim(),

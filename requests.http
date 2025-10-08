@@ -1,0 +1,34 @@
+
+@base = http://localhost:3001
+
+### GET kaikki
+GET {{base}}/api/transactions
+
+### Luo uusi
+# @name createTx
+POST {{base}}/api/transactions
+Content-Type: application/json
+
+{
+  "paiva": "2025-10-08",
+  "tyyppi": "myynti",
+  "selite": "Testimyynti",
+  "vastapuoli": "Testi Oy",
+  "summa": 123.45,
+  "maksettu": true
+}
+
+### Poista (käyttää edellä luodun vastauksen id:tä)
+@id = {{createTx.response.body.$.id}}
+DELETE {{base}}/api/transactions/{{id}}
+
+### (Valinnainen) virhetesti – 400 Bad Request
+POST {{base}}/api/transactions
+Content-Type: application/json
+
+{
+  "paiva": "",                 // puuttuu
+  "tyyppi": "myynti",
+  "selite": "Virheellinen",
+  "summa": -10                 // virhe: ei > 0
+}

@@ -1,27 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import TransactionList from './components/TransactionList'
-import TransactionForm from './components/TransactionForm' 
+import TransactionForm from './components/TransactionForm'
+import transactionService from './services/transactions';
 
-// Alkuarvot
-const initial = [ 
-  { id: "1", paiva: "2025-10-07", tyyppi: "myynti", selite: "Konsultointi", vastapuoli: "Asiakas Oy", summa: 120, maksettu: true },
-  { id: "2", paiva: "2025-10-06", tyyppi: "osto",   selite: "Sovellus", vastapuoli: "Kehittäjä Oy",   summa: 50,  maksettu: false },
-];
 
 // Pääkomponentti
 export default function App() {
-  const [transactions, setTransactions] = useState(initial); // tapahtumat
+  const [transactions, setTransactions] = useState([]); // tapahtumat
   const [filter, setFilter] = useState({ text: "", type: "all"}); // suodatin
 
+  // Haetaan tapahtumat palvelimelta
+  useEffect(() => {
+  transactionService.getAll().then(setTransactions);
+  }, []);
+
   // Lisää tapahtuma
-   const handleAdd = (tx) => {
+   const handleAdd = async (tx) => {
     console.log("[App] add", tx);
-    setTransactions(prev => [tx, ...prev]); // uusin ensin
+    const saved = await transactionService.create(tx); // palvelimelta tallennettu
+      setTransactions(prev => [saved, ...prev]); // lisätään alkuun
   };
 
-  const handleDelete = (tx) => {
+  const handleDelete = async (tx) => {
     console.log("[App] delete", tx);
+    await transactionService.remove(tx.id); // poistetaan palvelimelta
     setTransactions(prev => prev.filter(t => t.id !== tx.id)); // suodata pois
   }
 
