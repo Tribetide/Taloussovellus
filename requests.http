@@ -4,6 +4,9 @@
 ### GET kaikki
 GET {{base}}/api/transactions
 
+### GET ei löydy (404)
+GET http://localhost:3001/api/ei-ole
+
 ### Luo uusi
 # @name createTx
 POST {{base}}/api/transactions

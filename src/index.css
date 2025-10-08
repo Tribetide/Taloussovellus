@@ -49,6 +49,7 @@ h1 { margin: 0 0 12px; }
 /* pieni merkintä maksetuille */
 .badge-paid { color: #0a0; font-weight: 600; }
 
+/* lomake */
 .form {
   display: grid;
   grid-template-columns: 140px 120px 1fr 1fr 120px auto 90px; /* desktop */
@@ -57,16 +58,16 @@ h1 { margin: 0 0 12px; }
   margin: 12px 0 16px;
 }
 
-/* yleistä siistimistä */
+/* sarakkeiden sijoittelu */
 .form input, .form select { padding: 6px 8px; width: 100%; }
 .form button { padding: 6px 12px; }
 .checkbox { display: flex; align-items: center; gap: 6px; }
 
-/* ≤900px: 2 saraketta */
+/* sarakkeiden luokat */
 @media (max-width: 900px) {
   .form { grid-template-columns: 1fr 1fr; }
 
-  /* rivittäminen järkevästi */
+  /* sarakkeet */
   .col-date { grid-column: 1; }
   .col-type { grid-column: 2; }
 
@@ -99,17 +100,20 @@ h1 { margin: 0 0 12px; }
   gap: 12px;
   margin: 8px 0 16px;
 }
+/* yhteenvetolaatikot */
 .summary > div {
   padding: 10px 12px;
   border: 1px solid #eee;
   border-radius: 8px;
   background: #fafafa;
 }
+/* yhteenvetoteksti */
 .summary span {
   display: block;
   font-size: 12px;
   color: #666;
 }
+/* yhteenvetosummat */
 .summary strong {
   font-size: 18px;
 }

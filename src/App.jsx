@@ -27,8 +27,8 @@ export default function App() {
   // Lisää tapahtuma
    const handleAdd = async (tx) => {
     try {
-      const saved = await transactionService.create(tx);
-      setTransactions(prev => [saved, ...prev]);
+      const saved = await transactionService.create(tx); // tallenna palvelimelle
+      setTransactions(prev => [saved, ...prev]); // lisää tilaan
     } catch (error) {
       console.error(error);
       alert('Tallennus epäonnistui');
@@ -36,10 +36,10 @@ export default function App() {
   };
 
   const handleDelete = async (tx) => {
-    const prev = transactions;                         // optimistinen päivitys
-    setTransactions(p => p.filter(t => t.id !== tx.id));
+    const prev = transactions;                  // talleta vanha tila
+    setTransactions(p => p.filter(t => t.id !== tx.id)); // poista tilasta
     try {
-      await transactionService.remove(tx.id);
+      await transactionService.remove(tx.id); // poista palvelimelta
     } catch (error) {
       console.error(error);
       alert('Poisto epäonnistui — peruutetaan');
