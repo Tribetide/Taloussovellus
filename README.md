@@ -69,6 +69,7 @@ GET {{base}}/api/transactions/{{id}}
 DELETE {{base}}/api/transactions/{{id}}
 
 ### Luo uusi kirjaus
+```
 POST {{base}}/api/transactions
 Content-Type: application/json
 {
@@ -79,8 +80,9 @@ Content-Type: application/json
   "summa": 123.45,
   "maksettu": false
 }
-
+```
 ### Päivitä kirjaus (muuta arvoja)
+```
 PUT {{base}}/api/transactions/{{id}}
 Content-Type: application/json
 {
@@ -91,6 +93,6 @@ Content-Type: application/json
   "summa": 126.45,
   "maksettu": false
 }
-
+```
 
 
