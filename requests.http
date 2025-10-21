@@ -4,10 +4,7 @@
 ### GET kaikki
 GET {{base}}/api/transactions
 
-### GET ei löydy (404)
-GET http://localhost:3001/api/ei-ole
-
-### Luo uusi
+### Luo uusi (tallenna vastaus, jotta voit käyttää id:tä myöhemmin)
 # @name createTx
 POST {{base}}/api/transactions
 Content-Type: application/json
@@ -26,27 +23,15 @@ Content-Type: application/json
 DELETE {{base}}/api/transactions/{{id}}
 
 
-### Päivitä maksettu (vaihda arvoa true/false)
+### Päivitä (muuta arvoja)
 PUT {{base}}/api/transactions/{{id}}
 Content-Type: application/json
 
-{
-  "id": "21caa273-4d9b-4c4b-a98a-8664a9f01457",
+{ "id": "3355e7ca-5929-4c6a-83c6-4e6f51d7b1b7",
   "paiva": "2025-10-08",
   "tyyppi": "myynti",
   "selite": "Testimyynti",
   "vastapuoli": "Testi Oy",
-  "summa": 123.45,
+  "summa": 1210.45,
   "maksettu": false
-}
-
-### (Valinnainen) virhetesti – 400 Bad Request
-POST {{base}}/api/transactions
-Content-Type: application/json
-
-{
-  "paiva": "",                 // puuttuu
-  "tyyppi": "myynti",
-  "selite": "Virheellinen",
-  "summa": -10                 // virhe: ei > 0
 }
