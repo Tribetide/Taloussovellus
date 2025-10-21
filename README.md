@@ -60,13 +60,19 @@ APIn nopea testaus `requests.http`-tiedoston avulla (VSCode-laajennus: REST Clie
 ### API-pyynnöt
 
 ### Hae kaikki kirjaukset
+```
 GET {{base}}/api/transactions
+```
 
 ### Hae yksittäinen kirjaus
+```
 GET {{base}}/api/transactions/{{id}}
+```
 
 ### Poista kirjaus
+```
 DELETE {{base}}/api/transactions/{{id}}
+```
 
 ### Luo uusi kirjaus
 ```
